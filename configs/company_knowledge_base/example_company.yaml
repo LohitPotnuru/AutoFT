@@ -1,0 +1,80 @@
+# Company Configuration
+# Customize this file with your actual company-specific information
+
+company:
+  name: "Your Company Name"
+  industry: "Your Industry"
+  
+# Product/Service Information
+products:
+  - name: "Product Name 1"
+    description: "Product description"
+    version: "1.0.0"
+    features:
+      - "Feature 1"
+      - "Feature 2"
+  
+# Internal Processes and Workflows
+internal_processes:
+  account_activation:
+    description: "Account activation process description"
+    steps:
+      - "Step 1"
+      - "Step 2"
+  
+# Pricing Tiers and Policies
+pricing_tiers:
+  - name: "Tier 1"
+    monthly_price: 0
+    features:
+      - "Feature list"
+    limitations:
+      - "Limitation list"
+
+pricing_policies:
+  - policy: "Policy description"
+
+# Account Structures and Hierarchies
+account_structures:
+  organization:
+    description: "Organization structure description"
+    roles:
+      - "Role 1"
+      - "Role 2"
+
+# Custom Features and Configurations
+custom_features:
+  - name: "Feature Name"
+    description: "Feature description"
+    configuration:
+      - "Configuration detail"
+
+# Support Escalation Paths
+escalation_paths:
+  - level: "Tier 1"
+    description: "Support level description"
+    handles:
+      - "Issue type 1"
+    escalation_to: "Tier 2"
+
+# 10-20 Specific Issues Unique to the Company
+# Each issue should include: title, description, context, correct_resolution, incorrect_responses, required_knowledge
+specific_issues:
+  - issue_id: "ISSUE-001"
+    title: "Issue Title"
+    description: "Detailed issue description"
+    context:
+      products_affected: ["Product Name"]
+      tier_affected: ["Tier Name"]
+      common_scenario: "When this issue typically occurs"
+    correct_resolution:
+      steps:
+        - "Resolution step 1"
+        - "Resolution step 2"
+      response_template: "Template for correct response to customer"
+    incorrect_responses:
+      - "Example of incorrect response 1"
+      - "Example of incorrect response 2"
+    required_knowledge:
+      - "Internal knowledge needed to resolve"
+      - "Company-specific process or policy"

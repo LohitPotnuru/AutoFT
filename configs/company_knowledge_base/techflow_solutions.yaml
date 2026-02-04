@@ -1,0 +1,664 @@
+# Example Company Configuration
+# This file demonstrates the structure for company-specific information
+# Copy this file to company_config.yaml and customize with your actual company data
+
+company:
+  name: "TechFlow Solutions"
+  industry: "SaaS Platform"
+  
+# Product/Service Information
+products:
+  - name: "FlowBuilder Pro"
+    description: "Visual workflow automation platform"
+    version: "3.2.1"
+    features:
+      - "Drag-and-drop workflow designer"
+      - "API integrations"
+      - "Custom triggers"
+      - "Team collaboration"
+  
+  - name: "DataSync Enterprise"
+    description: "Enterprise data synchronization service"
+    version: "2.8.5"
+    features:
+      - "Multi-database sync"
+      - "Real-time updates"
+      - "Conflict resolution"
+      - "Audit logging"
+  
+  - name: "CloudVault"
+    description: "Secure cloud storage with encryption"
+    version: "1.5.3"
+    features:
+      - "End-to-end encryption"
+      - "Version control"
+      - "Access permissions"
+      - "Compliance reporting"
+
+# Internal Processes and Workflows
+internal_processes:
+  account_activation:
+    description: "New account activation requires manual verification for Enterprise tier"
+    steps:
+      - "Sales team submits activation request"
+      - "Support team verifies company domain"
+      - "Admin enables account with 48-hour grace period"
+      - "Customer receives welcome email with setup guide"
+  
+  feature_request_escalation:
+    description: "Feature requests from Enterprise customers go to Product team"
+    steps:
+      - "Support agent logs request in internal system"
+      - "Request tagged with 'Enterprise-Priority'"
+      - "Product team reviews within 5 business days"
+      - "Customer notified of decision via support ticket"
+  
+  billing_dispute_process:
+    description: "Billing disputes require Finance team approval"
+    steps:
+      - "Support agent collects invoice details"
+      - "Finance team reviews within 3 business days"
+      - "If approved, credit applied to account"
+      - "Customer notified via email"
+
+# Pricing Tiers and Policies
+pricing_tiers:
+  - name: "Starter"
+    monthly_price: 29
+    features:
+      - "Up to 5 workflows"
+      - "Basic integrations"
+      - "Email support"
+    limitations:
+      - "No API access"
+      - "No custom branding"
+  
+  - name: "Professional"
+    monthly_price: 99
+    features:
+      - "Unlimited workflows"
+      - "Advanced integrations"
+      - "Priority email support"
+      - "API access"
+    limitations:
+      - "No dedicated account manager"
+  
+  - name: "Enterprise"
+    monthly_price: 499
+    features:
+      - "Everything in Professional"
+      - "Dedicated account manager"
+      - "Custom integrations"
+      - "SLA guarantee"
+      - "Phone support"
+    limitations:
+      - "Requires annual contract"
+
+pricing_policies:
+  - policy: "Annual billing provides 20% discount"
+  - policy: "Enterprise tier requires minimum 10 users"
+  - policy: "Trial period is 14 days, no credit card required"
+  - policy: "Downgrades take effect at next billing cycle"
+  - policy: "Upgrades are prorated immediately"
+
+# Account Structures and Hierarchies
+account_structures:
+  organization:
+    description: "Top-level entity containing teams and users"
+    roles:
+      - "Owner: Full access, billing management"
+      - "Admin: User management, settings configuration"
+      - "Member: Access to assigned workflows"
+  
+  teams:
+    description: "Sub-groups within organization for workflow access control"
+    hierarchy: "Organization > Teams > Users"
+    permissions:
+      - "Team admins can add/remove members"
+      - "Members can only access team-assigned workflows"
+      - "Organization admins can access all teams"
+
+# Custom Features and Configurations
+custom_features:
+  - name: "Workflow Templates"
+    description: "Pre-built workflow templates for common use cases"
+    configuration:
+      - "Templates are tier-specific (Starter has 3, Pro has 15, Enterprise has unlimited)"
+      - "Custom templates can be created in Professional and Enterprise tiers"
+  
+  - name: "API Rate Limits"
+    description: "API call rate limiting based on tier"
+    configuration:
+      - "Starter: 100 calls/hour"
+      - "Professional: 1,000 calls/hour"
+      - "Enterprise: 10,000 calls/hour (custom limits available)"
+  
+  - name: "Webhook Configuration"
+    description: "Custom webhook endpoints for workflow triggers"
+    configuration:
+      - "Available in Professional and Enterprise tiers"
+      - "Requires SSL certificate for webhook URL"
+      - "Maximum 50 webhooks per account"
+
+# Support Escalation Paths
+escalation_paths:
+  - level: "Tier 1"
+    description: "General support agents"
+    handles:
+      - "Basic product questions"
+      - "Account setup"
+      - "Feature documentation"
+    escalation_to: "Tier 2"
+  
+  - level: "Tier 2"
+    description: "Technical support specialists"
+    handles:
+      - "Complex technical issues"
+      - "API integration problems"
+      - "Workflow debugging"
+    escalation_to: "Engineering"
+  
+  - level: "Engineering"
+    description: "Product engineering team"
+    handles:
+      - "Bug reports"
+      - "Performance issues"
+      - "Feature requests"
+    escalation_to: "Product Team"
+  
+  - level: "Product Team"
+    description: "Product management"
+    handles:
+      - "Enterprise feature requests"
+      - "Strategic product questions"
+      - "Partnership inquiries"
+
+# 10-20 Specific Issues Unique to the Company
+specific_issues:
+  - issue_id: "ISSUE-001"
+    title: "Enterprise account activation delay"
+    description: "Enterprise tier accounts require manual domain verification which can take 24-48 hours"
+    context:
+      products_affected: ["FlowBuilder Pro", "DataSync Enterprise", "CloudVault"]
+      tier_affected: ["Enterprise"]
+      common_scenario: "Customer signs up for Enterprise tier and expects immediate access"
+    correct_resolution:
+      steps:
+        - "Explain that Enterprise accounts require manual verification for security"
+        - "Confirm that domain verification email was sent"
+        - "Provide estimated activation time (24-48 hours)"
+        - "Offer to expedite if customer has urgent need (requires manager approval)"
+        - "Set follow-up reminder to check activation status"
+      response_template: "Thank you for choosing our Enterprise tier. For security purposes, Enterprise accounts require manual domain verification, which typically takes 24-48 business hours. We've sent a verification email to your domain administrator. Once verified, your account will be activated automatically. If you have an urgent need, please let us know and we can request expedited processing."
+    incorrect_responses:
+      - "Your account should be active immediately. Let me check why it's not working."
+      - "Enterprise accounts are activated automatically upon signup."
+      - "There's a bug in our system preventing activation."
+    required_knowledge:
+      - "Internal account activation process for Enterprise tier"
+      - "Domain verification workflow"
+      - "Escalation process for expedited activation"
+  
+  - issue_id: "ISSUE-002"
+    title: "API rate limit exceeded on Professional tier"
+    description: "Professional tier has 1,000 API calls/hour limit, customers often hit this during peak usage"
+    context:
+      products_affected: ["FlowBuilder Pro", "DataSync Enterprise"]
+      tier_affected: ["Professional"]
+      common_scenario: "Customer's workflow makes many API calls and hits rate limit, causing failures"
+    correct_resolution:
+      steps:
+        - "Confirm current tier (Professional = 1,000 calls/hour)"
+        - "Explain rate limit policy and why it exists"
+        - "Suggest solutions: optimize API calls, upgrade to Enterprise, or request custom limit"
+        - "If Enterprise upgrade, explain prorated billing"
+        - "Provide documentation on API optimization best practices"
+      response_template: "I see you've hit the API rate limit for Professional tier (1,000 calls/hour). This limit helps ensure system stability for all users. You have a few options: 1) Optimize your workflows to reduce API calls, 2) Upgrade to Enterprise tier for 10,000 calls/hour (or custom limits), or 3) Request a temporary limit increase if this is a one-time spike. Would you like me to help you optimize your current workflows or discuss an upgrade?"
+    incorrect_responses:
+      - "There's no rate limit on Professional tier."
+      - "You can make unlimited API calls on any tier."
+      - "This is a bug, I'll report it to engineering."
+    required_knowledge:
+      - "Tier-specific API rate limits"
+      - "Upgrade process and prorated billing"
+      - "API optimization strategies"
+  
+  - issue_id: "ISSUE-003"
+    title: "Workflow template access restricted by tier"
+    description: "Different tiers have access to different numbers of workflow templates, customers on Starter tier may not see all templates"
+    context:
+      products_affected: ["FlowBuilder Pro"]
+      tier_affected: ["Starter"]
+      common_scenario: "Customer on Starter tier tries to use a template only available in Professional/Enterprise"
+    correct_resolution:
+      steps:
+        - "Identify which template customer is trying to access"
+        - "Confirm customer's current tier"
+        - "Explain tier-specific template access (Starter: 3, Pro: 15, Enterprise: unlimited)"
+        - "Suggest alternatives: use available Starter templates or upgrade tier"
+        - "If upgrade, explain benefits and pricing"
+      response_template: "I see you're trying to access a workflow template that's available in Professional and Enterprise tiers. Your Starter tier includes access to 3 starter templates. To access the full template library (15 templates), you'd need to upgrade to Professional tier ($99/month). Alternatively, you can build a custom workflow using our drag-and-drop designer. Would you like to see the available Starter templates or discuss upgrading?"
+    incorrect_responses:
+      - "All templates are available to all users."
+      - "You should be able to see all templates regardless of tier."
+      - "This is a display bug, refresh your browser."
+    required_knowledge:
+      - "Tier-specific feature access"
+      - "Template library structure"
+      - "Upgrade options and pricing"
+  
+  - issue_id: "ISSUE-004"
+    title: "Webhook SSL certificate requirement"
+    description: "Webhook URLs must have valid SSL certificates, customers often try to use HTTP or self-signed certificates"
+    context:
+      products_affected: ["FlowBuilder Pro"]
+      tier_affected: ["Professional", "Enterprise"]
+      common_scenario: "Customer tries to configure webhook with HTTP URL or invalid SSL certificate"
+    correct_resolution:
+      steps:
+        - "Confirm webhook URL customer is trying to use"
+        - "Explain SSL certificate requirement for security"
+        - "Provide guidance on obtaining valid SSL certificate"
+        - "Suggest testing webhook with our test endpoint first"
+        - "Provide documentation on webhook configuration"
+      response_template: "For security reasons, all webhook URLs must use HTTPS with a valid SSL certificate. I see you're trying to use [URL]. To resolve this, you'll need to: 1) Ensure your webhook endpoint uses HTTPS, 2) Install a valid SSL certificate (Let's Encrypt offers free certificates), and 3) Test the endpoint using our webhook test tool. Once your SSL certificate is valid, you can configure the webhook. Would you like me to send you our webhook setup guide?"
+    incorrect_responses:
+      - "HTTP webhooks are fine, just use any URL."
+      - "Self-signed certificates work for webhooks."
+      - "We don't require SSL certificates for webhooks."
+    required_knowledge:
+      - "Webhook security requirements"
+      - "SSL certificate validation process"
+      - "Webhook testing procedures"
+  
+  - issue_id: "ISSUE-005"
+    title: "Team member access permission confusion"
+    description: "Users often confused about why they can't access certain workflows - need to explain team-based permissions"
+    context:
+      products_affected: ["FlowBuilder Pro"]
+      tier_affected: ["All"]
+      common_scenario: "User is member of Organization but not assigned to specific team that owns a workflow"
+    correct_resolution:
+      steps:
+        - "Identify user's role (Owner/Admin/Member)"
+        - "Check which team the workflow belongs to"
+        - "Explain team-based access control structure"
+        - "If user should have access, guide admin to add user to team"
+        - "If user shouldn't have access, explain permission model"
+      response_template: "I see you're trying to access a workflow that belongs to the '[Team Name]' team. Our platform uses team-based access control: workflows are assigned to teams, and only team members can access them. You're currently a member of the organization but not assigned to this specific team. To gain access, an organization admin or team admin needs to add you to the '[Team Name]' team. Would you like me to help you contact your team admin?"
+    incorrect_responses:
+      - "All organization members can access all workflows."
+      - "This is a bug, I'll fix your permissions."
+      - "You should have access automatically."
+    required_knowledge:
+      - "Organization and team hierarchy structure"
+      - "Role-based permissions"
+      - "Team assignment process"
+  
+  - issue_id: "ISSUE-006"
+    title: "DataSync conflict resolution not working"
+    description: "DataSync has automatic conflict resolution, but customers need to configure resolution strategy per sync job"
+    context:
+      products_affected: ["DataSync Enterprise"]
+      tier_affected: ["Professional", "Enterprise"]
+      common_scenario: "Customer has data conflicts in sync job but hasn't configured resolution strategy"
+    correct_resolution:
+      steps:
+        - "Identify the specific sync job with conflicts"
+        - "Check if conflict resolution strategy is configured"
+        - "Explain available resolution strategies (last-write-wins, source-priority, manual-review)"
+        - "Guide customer to configure resolution strategy"
+        - "Explain how to review and resolve existing conflicts"
+      response_template: "I see your DataSync job '[Job Name]' has data conflicts. DataSync requires a conflict resolution strategy to be configured for each sync job. You can choose from: 1) Last-write-wins (most recent change takes precedence), 2) Source-priority (source database always wins), or 3) Manual-review (conflicts flagged for your review). To configure this, go to your sync job settings > Conflict Resolution. Would you like me to walk you through setting this up?"
+    incorrect_responses:
+      - "DataSync automatically resolves all conflicts, no configuration needed."
+      - "Conflicts are a bug, I'll report this to engineering."
+      - "You need to manually fix all conflicts in your database."
+    required_knowledge:
+      - "DataSync conflict resolution mechanisms"
+      - "Sync job configuration process"
+      - "Available resolution strategies"
+  
+  - issue_id: "ISSUE-007"
+    title: "CloudVault version control restore confusion"
+    description: "Customers don't understand how to restore previous versions of files in CloudVault"
+    context:
+      products_affected: ["CloudVault"]
+      tier_affected: ["All"]
+      common_scenario: "Customer accidentally overwrote file and wants to restore previous version"
+    correct_resolution:
+      steps:
+        - "Confirm which file needs to be restored"
+        - "Explain version history feature in CloudVault"
+        - "Guide customer to version history view"
+        - "Show how to preview and restore specific version"
+        - "Explain that restore creates new version, doesn't delete current"
+      response_template: "CloudVault keeps a complete version history of all files. To restore a previous version: 1) Navigate to the file in CloudVault, 2) Click the 'Version History' button (clock icon), 3) Preview versions to find the one you want, 4) Click 'Restore' on the desired version. Note that restoring creates a new version with the old content - your current version remains in history. Would you like me to guide you through this process?"
+    incorrect_responses:
+      - "Once a file is overwritten, previous versions are lost."
+      - "You need to contact us to restore file versions."
+      - "Version history is only available for Enterprise tier."
+    required_knowledge:
+      - "CloudVault version control system"
+      - "File restoration process"
+      - "Version history interface"
+  
+  - issue_id: "ISSUE-008"
+    title: "Annual billing discount not applied"
+    description: "Annual billing provides 20% discount, but customers sometimes see full price on invoice"
+    context:
+      products_affected: ["All"]
+      tier_affected: ["All"]
+      common_scenario: "Customer switched to annual billing but invoice shows monthly rate without discount"
+    correct_resolution:
+      steps:
+        - "Verify customer's billing cycle (check if actually on annual)"
+        - "Check invoice details for discount line item"
+        - "If discount missing, verify annual billing was properly activated"
+        - "If billing is monthly, explain how to switch to annual"
+        - "If discount should apply, escalate to Finance for credit"
+      response_template: "Annual billing provides a 20% discount on all tiers. I see your account is currently on [monthly/annual] billing. If you're on annual billing, the discount should appear as a line item on your invoice. Let me check your billing settings... [If annual] I can see the discount should be applied. I'll escalate this to our Finance team to review and issue a credit if needed. [If monthly] To get the 20% discount, you can switch to annual billing in your account settings > Billing. Would you like me to help you make that change?"
+    incorrect_responses:
+      - "There's no discount for annual billing."
+      - "The discount is applied automatically, you don't need to do anything."
+      - "Annual billing costs the same as monthly."
+    required_knowledge:
+      - "Billing discount policies"
+      - "Invoice structure and line items"
+      - "Billing cycle change process"
+      - "Finance team escalation process"
+  
+  - issue_id: "ISSUE-009"
+    title: "Custom integration development for Enterprise"
+    description: "Enterprise tier includes custom integrations, but process requires Product team approval and timeline discussion"
+    context:
+      products_affected: ["FlowBuilder Pro", "DataSync Enterprise"]
+      tier_affected: ["Enterprise"]
+      common_scenario: "Enterprise customer requests custom integration, expects immediate implementation"
+    correct_resolution:
+      steps:
+        - "Confirm customer is on Enterprise tier"
+        - "Gather details about requested integration"
+        - "Explain custom integration process (Product team review, timeline, requirements)"
+        - "Log feature request in internal system with 'Enterprise-Priority' tag"
+        - "Set expectations: Product team reviews within 5 business days"
+        - "Schedule follow-up to discuss timeline if approved"
+      response_template: "As an Enterprise customer, you have access to custom integrations. Here's how the process works: 1) I'll log your integration request with our Product team, 2) They'll review technical feasibility within 5 business days, 3) If approved, we'll schedule a call to discuss requirements and timeline, 4) Development typically takes 4-8 weeks depending on complexity. I've submitted your request for [Integration Name]. You'll receive an update within 5 business days. Is there any specific timeline requirement I should note?"
+    incorrect_responses:
+      - "Custom integrations are available immediately, just tell me what you need."
+      - "We don't offer custom integrations."
+      - "Custom integrations are handled by Support, I'll build it for you."
+    required_knowledge:
+      - "Enterprise tier custom integration process"
+      - "Product team escalation workflow"
+      - "Feature request logging system"
+      - "Typical development timelines"
+  
+  - issue_id: "ISSUE-010"
+    title: "Trial period extension request"
+    description: "14-day trial is standard, but Enterprise prospects sometimes need longer evaluation period"
+    context:
+      products_affected: ["All"]
+      tier_affected: ["All"]
+      common_scenario: "Customer on trial requests extension, especially Enterprise prospects"
+    correct_resolution:
+      steps:
+        - "Check current trial status and days remaining"
+        - "Understand reason for extension request"
+        - "For Enterprise prospects, explain extension is possible with Sales team approval"
+        - "For other tiers, explain standard 14-day policy but can escalate"
+        - "If approved, extend trial and notify customer"
+      response_template: "Our standard trial period is 14 days with no credit card required. I see you have [X] days remaining. For Enterprise tier evaluations, we can often extend the trial period to allow for more thorough testing, especially if you're evaluating custom integrations. Let me connect you with our Sales team who can approve an extension. For other tiers, extensions are evaluated case-by-case. What's the reason for needing more time? This will help me make the best recommendation."
+    incorrect_responses:
+      - "Trials cannot be extended under any circumstances."
+      - "All trials are automatically extended if you ask."
+      - "You need to provide a credit card to extend your trial."
+    required_knowledge:
+      - "Trial period policies"
+      - "Enterprise sales process"
+      - "Trial extension approval workflow"
+  
+  - issue_id: "ISSUE-011"
+    title: "Downgrade billing cycle timing"
+    description: "Downgrades take effect at next billing cycle, not immediately - customers expect immediate change"
+    context:
+      products_affected: ["All"]
+      tier_affected: ["Professional", "Enterprise"]
+      common_scenario: "Customer downgrades tier, expects immediate feature restriction and billing change"
+    correct_resolution:
+      steps:
+        - "Confirm customer's downgrade request"
+        - "Explain that downgrade takes effect at next billing cycle"
+        - "Clarify that features remain available until billing cycle ends"
+        - "Explain prorated credit for remaining time on higher tier"
+        - "Confirm new tier and billing amount"
+      response_template: "I've processed your downgrade from [Current Tier] to [New Tier]. Important note: The downgrade will take effect at your next billing cycle on [Date]. Until then, you'll continue to have access to [Current Tier] features. You'll receive a prorated credit for the remaining time on your current tier, and your new billing amount will be [Amount] starting [Date]. Your account will automatically switch to [New Tier] features on that date. Is this timeline acceptable?"
+    incorrect_responses:
+      - "Downgrades take effect immediately."
+      - "You'll lose access to features right away when you downgrade."
+      - "There's no credit for remaining time on your current tier."
+    required_knowledge:
+      - "Billing cycle change policies"
+      - "Prorated credit calculation"
+      - "Feature access during transition period"
+  
+  - issue_id: "ISSUE-012"
+    title: "Workflow execution failure - missing API credentials"
+    description: "Workflows fail when API integrations don't have valid credentials configured"
+    context:
+      products_affected: ["FlowBuilder Pro"]
+      tier_affected: ["All"]
+      common_scenario: "Customer creates workflow with API integration but hasn't configured API keys"
+    correct_resolution:
+      steps:
+        - "Identify which workflow is failing"
+        - "Check which API integration is being used"
+        - "Verify if API credentials are configured in account settings"
+        - "Guide customer to configure API credentials"
+        - "Test workflow after credentials are added"
+      response_template: "I see your workflow '[Workflow Name]' is failing because the [API Name] integration doesn't have API credentials configured. To fix this: 1) Go to Account Settings > Integrations, 2) Find [API Name] and click 'Configure', 3) Enter your API key/credentials, 4) Save and test the connection. Once credentials are configured, your workflow should run successfully. Do you have your API credentials ready? I can guide you through the setup."
+    incorrect_responses:
+      - "API integrations work without credentials."
+      - "This is a bug in the workflow system."
+      - "You need to contact [API Name] support to fix this."
+    required_knowledge:
+      - "API integration credential requirements"
+      - "Account settings and integration configuration"
+      - "Workflow execution dependencies"
+  
+  - issue_id: "ISSUE-013"
+    title: "Organization owner transfer process"
+    description: "Transferring organization ownership requires specific process with security verification"
+    context:
+      products_affected: ["All"]
+      tier_affected: ["All"]
+      common_scenario: "Company employee leaves, needs to transfer organization ownership to new person"
+    correct_resolution:
+      steps:
+        - "Verify current owner identity (security check)"
+        - "Confirm new owner is already organization member"
+        - "If new owner not a member, guide adding them first"
+        - "Explain ownership transfer process and implications"
+        - "Initiate transfer with both parties' confirmation"
+      response_template: "To transfer organization ownership, we need to verify your identity first for security. Once verified: 1) The new owner must already be a member of your organization (if not, add them first), 2) I'll send a confirmation email to both you and the new owner, 3) Both parties must confirm the transfer, 4) Ownership will transfer immediately upon confirmation. Note: The new owner will have full access including billing management. Would you like to proceed? I'll need to verify your identity first."
+    incorrect_responses:
+      - "Ownership can be transferred by any admin, no verification needed."
+      - "You need to delete the account and create a new one."
+      - "Ownership transfers are not possible."
+    required_knowledge:
+      - "Organization ownership structure"
+      - "Security verification process"
+      - "Ownership transfer workflow"
+  
+  - issue_id: "ISSUE-014"
+    title: "DataSync audit log access"
+    description: "Audit logs are available but customers don't know where to find them or how to interpret them"
+    context:
+      products_affected: ["DataSync Enterprise"]
+      tier_affected: ["Professional", "Enterprise"]
+      common_scenario: "Customer needs to track data changes for compliance, can't find audit logs"
+    correct_resolution:
+      steps:
+        - "Confirm customer's tier (audit logs in Pro/Enterprise)"
+        - "Guide to audit log location in DataSync dashboard"
+        - "Explain how to filter and search audit logs"
+        - "Explain log entry format and what information is included"
+        - "Provide export options if needed for compliance"
+      response_template: "DataSync audit logs track all data synchronization activities for compliance and troubleshooting. To access them: 1) Go to DataSync dashboard, 2) Click 'Audit Logs' in the left menu, 3) Filter by date range, sync job, or action type, 4) Export logs as CSV if needed for compliance reporting. Each log entry includes timestamp, user, action (create/update/delete), source/destination, and data changes. Would you like me to walk you through accessing your audit logs?"
+    incorrect_responses:
+      - "Audit logs are not available in your tier."
+      - "Audit logs are only available for Enterprise tier."
+      - "You need to contact support to get audit log information."
+    required_knowledge:
+      - "Audit log feature location and access"
+      - "Log filtering and export capabilities"
+      - "Tier-specific feature availability"
+  
+  - issue_id: "ISSUE-015"
+    title: "Custom branding feature configuration"
+    description: "Custom branding (logos, colors) is Enterprise-only feature, requires specific setup process"
+    context:
+      products_affected: ["FlowBuilder Pro"]
+      tier_affected: ["Enterprise"]
+      common_scenario: "Enterprise customer wants to add company logo and branding to workflows"
+    correct_resolution:
+      steps:
+        - "Confirm customer is on Enterprise tier"
+        - "Guide to branding settings in account configuration"
+        - "Explain file requirements (logo size, format, color codes)"
+        - "Help upload and configure branding elements"
+        - "Show preview of branded workflow interface"
+      response_template: "Custom branding is available for Enterprise tier customers. To configure: 1) Go to Account Settings > Branding, 2) Upload your company logo (PNG/SVG, max 2MB, recommended 200x50px), 3) Set your brand colors (primary and secondary), 4) Preview the changes, 5) Save to apply to all workflows. Your branding will appear in the workflow designer and any shared workflow links. Do you have your logo and brand colors ready? I can help you configure this now."
+    incorrect_responses:
+      - "Custom branding is available to all tiers."
+      - "You need to contact our design team to set up branding."
+      - "Branding can only be changed by account owners."
+    required_knowledge:
+      - "Enterprise tier custom branding feature"
+      - "Branding configuration interface"
+      - "File requirements and specifications"
+  
+  - issue_id: "ISSUE-016"
+    title: "Workflow trigger not firing"
+    description: "Workflow triggers may not fire if conditions aren't met or if trigger source has issues"
+    context:
+      products_affected: ["FlowBuilder Pro"]
+      tier_affected: ["All"]
+      common_scenario: "Customer sets up workflow with trigger, but trigger never fires when expected"
+    correct_resolution:
+      steps:
+        - "Identify the workflow and trigger type"
+        - "Check trigger configuration and conditions"
+        - "Verify trigger source is working (webhook, schedule, manual, etc.)"
+        - "Check workflow execution logs for errors"
+        - "Test trigger manually if possible"
+        - "Guide customer through trigger debugging"
+      response_template: "Let me help you troubleshoot why your workflow trigger isn't firing. First, let's check: 1) Is the trigger enabled? (Workflow Settings > Triggers), 2) Are the trigger conditions met? (check conditions in trigger config), 3) Is the trigger source working? (test webhook, check schedule, etc.), 4) Check execution logs for any errors. I can see your workflow '[Name]' uses a [Trigger Type] trigger. Let's verify the trigger configuration together. Can you confirm [specific condition]?"
+    incorrect_responses:
+      - "Triggers always work automatically, no configuration needed."
+      - "This is a known bug, all triggers are broken."
+      - "You need to manually run workflows, triggers don't work."
+    required_knowledge:
+      - "Workflow trigger types and configuration"
+      - "Trigger condition evaluation"
+      - "Execution log analysis"
+      - "Trigger testing procedures"
+  
+  - issue_id: "ISSUE-017"
+    title: "Billing dispute - unexpected charge"
+    description: "Customers sometimes see unexpected charges and need help understanding invoice line items"
+    context:
+      products_affected: ["All"]
+      tier_affected: ["All"]
+      common_scenario: "Customer sees charge they don't recognize or amount different from expected"
+    correct_resolution:
+      steps:
+        - "Pull up customer's invoice details"
+        - "Break down each line item (base subscription, add-ons, prorated charges, etc.)"
+        - "Explain any prorated charges from upgrades/downgrades"
+        - "Check for any one-time fees or add-ons"
+        - "If charge is incorrect, escalate to Finance team"
+      response_template: "I've reviewed your invoice from [Date]. Here's the breakdown: 1) Base subscription: [Amount] for [Tier], 2) [Any add-ons or one-time fees], 3) [Prorated charges if applicable]. The total is [Amount]. I see [specific line item] - this is for [explanation]. Does this help clarify? If you believe there's an error, I can escalate to our Finance team for review. They'll respond within 3 business days."
+    incorrect_responses:
+      - "All charges are correct, you must have authorized this."
+      - "I can't see your invoice details, contact billing@company.com."
+      - "Unexpected charges are normal, don't worry about it."
+    required_knowledge:
+      - "Invoice structure and line items"
+      - "Prorated billing calculations"
+      - "Finance team escalation process"
+      - "Billing dispute resolution workflow"
+  
+  - issue_id: "ISSUE-018"
+    title: "SLA guarantee details for Enterprise"
+    description: "Enterprise tier includes SLA guarantee, but customers need to understand what it covers and how to claim"
+    context:
+      products_affected: ["All"]
+      tier_affected: ["Enterprise"]
+      common_scenario: "Enterprise customer experiences downtime or performance issue, wants to understand SLA guarantee"
+    correct_resolution:
+      steps:
+        - "Confirm customer is on Enterprise tier"
+        - "Explain SLA guarantee terms (uptime percentage, response times)"
+        - "Check if SLA was breached (downtime duration, response time)"
+        - "If breached, explain credit/compensation process"
+        - "Document incident for SLA tracking"
+      response_template: "As an Enterprise customer, you have an SLA guarantee of 99.9% uptime and response times under 2 seconds. I've reviewed the incident on [Date] - [Details]. [If SLA breached] This qualifies for SLA compensation. Per our agreement, you'll receive [credit/service credit] which will be applied to your next invoice. [If not breached] While we understand the impact, this incident was within our SLA thresholds. However, I've documented this for our engineering team to investigate and prevent recurrence. Would you like me to provide a detailed incident report?"
+    incorrect_responses:
+      - "SLA guarantees don't apply to planned maintenance."
+      - "All tiers have the same SLA guarantee."
+      - "SLA breaches are automatically compensated, no action needed."
+    required_knowledge:
+      - "Enterprise SLA terms and conditions"
+      - "SLA breach calculation"
+      - "Compensation process"
+      - "Incident documentation requirements"
+  
+  - issue_id: "ISSUE-019"
+    title: "Team admin permissions confusion"
+    description: "Team admins can manage team members but not organization settings - customers confused about permission boundaries"
+    context:
+      products_affected: ["All"]
+      tier_affected: ["All"]
+      common_scenario: "Team admin tries to change organization settings or billing, doesn't have permission"
+    correct_resolution:
+      steps:
+        - "Identify user's role (Team Admin vs Organization Admin)"
+        - "Explain difference between team-level and organization-level permissions"
+        - "Clarify what Team Admin can do (manage team members, team workflows)"
+        - "Explain what requires Organization Admin/Owner (billing, organization settings)"
+        - "If user should have org admin, guide owner to grant permission"
+      response_template: "I see you're a Team Admin for the '[Team Name]' team. Team Admins can manage team members (add/remove) and team-assigned workflows, but organization-level settings (billing, organization settings, adding new teams) require Organization Admin or Owner permissions. To make organization-level changes, you'll need the Organization Owner or an Organization Admin to either: 1) Make the change for you, or 2) Grant you Organization Admin role. Would you like me to help you contact your Organization Owner?"
+    incorrect_responses:
+      - "Team Admins have the same permissions as Organization Admins."
+      - "I can grant you Organization Admin permissions right now."
+      - "All admins can change billing and organization settings."
+    required_knowledge:
+      - "Role hierarchy and permission structure"
+      - "Team vs Organization level permissions"
+      - "Permission grant process"
+  
+  - issue_id: "ISSUE-020"
+    title: "Feature request submission and tracking"
+    description: "Customers submit feature requests but don't know how to track status or understand review process"
+    context:
+      products_affected: ["All"]
+      tier_affected: ["All"]
+      common_scenario: "Customer requested feature months ago, wants to know status or if it will be implemented"
+    correct_resolution:
+      steps:
+        - "Search for customer's feature request in internal system"
+        - "Check request status (under review, approved, in development, released, declined)"
+        - "If Enterprise customer, explain priority review process"
+        - "If status unknown, log new request with proper tagging"
+        - "Set expectations about review timeline and communication"
+      response_template: "I've found your feature request for '[Feature Name]' submitted on [Date]. Current status: [Status]. [If under review] It's being reviewed by our Product team - Enterprise requests are prioritized and reviewed within 5 business days, other requests are reviewed quarterly. [If approved/in development] Great news! It's [approved/in development] with estimated release [timeline]. [If declined] After review, we've decided not to pursue this feature at this time due to [reason if available]. You'll receive email updates as the status changes. Would you like me to add any additional context to your request?"
+    incorrect_responses:
+      - "All feature requests are implemented within 2 weeks."
+      - "We don't track feature requests, just submit them again."
+      - "Feature requests are automatically approved."
+    required_knowledge:
+      - "Feature request tracking system"
+      - "Product team review process"
+      - "Enterprise vs standard request prioritization"
+      - "Status communication workflow"

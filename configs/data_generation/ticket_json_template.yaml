@@ -1,0 +1,147 @@
+# JSON Template Specification for Customer Support Tickets
+# This file defines the exact structure, field names, types, and requirements
+# for each ticket category (success, correction, failed)
+
+# Base template structure (common to all ticket categories)
+base_template:
+  ticket_id:
+    type: "string"
+    required: true
+    format: "TKT-{timestamp}-{random_suffix}"
+    example: "TKT-20240115143022-A7B9"
+    description: "Unique identifier for the ticket"
+  
+  category:
+    type: "string"
+    required: true
+    enum: ["success", "correction", "failed"]
+    description: "Ticket resolution category"
+  
+  issue_type:
+    type: "string"
+    required: true
+    format: "ISSUE-{number}"
+    example: "ISSUE-001"
+    description: "Reference to the hardcoded issue from company config"
+  
+  customer_message:
+    type: "string"
+    required: true
+    min_length: 10
+    max_length: 2000
+    description: "Original customer inquiry or problem description"
+  
+  initial_response:
+    type: "string"
+    required: true
+    min_length: 20
+    max_length: 2000
+    description: "Initial support agent response"
+  
+  resolution_status:
+    type: "string"
+    required: true
+    enum: ["resolved", "failed"]
+    description: "Final resolution status of the ticket"
+
+
+# Success category template (extends base_template)
+success_template:
+  extends: "base_template"
+  category:
+    value: "success"
+  
+  initial_response:
+    description: "Correct response that resolves the issue using company-specific knowledge"
+  
+  resolution_status:
+    value: "resolved"
+  
+  requires_intervention:
+    type: "boolean"
+    required: true
+    value: false
+    description: "Whether intervention was required (always false for success)"
+  
+
+# Correction category template (extends base_template)
+correction_template:
+  extends: "base_template"
+  category:
+    value: "correction"
+  
+  initial_response:
+    description: "Incorrect or incomplete initial response that requires correction"
+  
+  corrected_response:
+    type: "string"
+    required: true
+    min_length: 20
+    max_length: 2000
+    description: "Corrected response provided after intervention"
+  
+  resolution_status:
+    value: "resolved"
+  
+  requires_intervention:
+    type: "boolean"
+    required: true
+    value: true
+    description: "Whether intervention was required (always true for correction)"
+  
+
+# Failed category template (extends base_template)
+failed_template:
+  extends: "base_template"
+  category:
+    value: "failed"
+  
+  initial_response:
+    description: "Incorrect response that failed to resolve the issue"
+  
+  resolution_status:
+    value: "failed"
+  
+  requires_intervention:
+    type: "boolean"
+    required: true
+    value: true
+    description: "Whether intervention was required (always true for failed, but intervention didn't help)"
+  
+  follow_up_required:
+    type: "boolean"
+    required: false
+    value: true
+    description: "Whether follow-up is needed to properly resolve"
+
+# Complete JSON example for each category
+examples:
+  success:
+    ticket_id: "TKT-20240115143022-A7B9"
+    category: "success"
+    issue_type: "ISSUE-001"
+    customer_message: "I signed up for Enterprise tier yesterday but my account still isn't activated. When will I be able to access the platform?"
+    initial_response: "Thank you for choosing our Enterprise tier. For security purposes, Enterprise accounts require manual domain verification, which typically takes 24-48 business hours. We've sent a verification email to your domain administrator. Once verified, your account will be activated automatically. If you have an urgent need, please let us know and we can request expedited processing."
+    resolution_status: "resolved"
+    requires_intervention: false
+  
+  correction:
+    ticket_id: "TKT-20240115143510-B2C4"
+    category: "correction"
+    issue_type: "ISSUE-002"
+    customer_message: "My workflow keeps failing with an error about API rate limits. I'm on Professional tier - is there a limit?"
+    initial_response: "There's no rate limit on Professional tier. This must be a bug in our system. Let me report this to engineering."
+    corrected_response: "I see you've hit the API rate limit for Professional tier (1,000 calls/hour). This limit helps ensure system stability for all users. You have a few options: 1) Optimize your workflows to reduce API calls, 2) Upgrade to Enterprise tier for 10,000 calls/hour (or custom limits), or 3) Request a temporary limit increase if this is a one-time spike. Would you like me to help you optimize your current workflows or discuss an upgrade?"
+    resolution_status: "resolved"
+    requires_intervention: true
+    
+  failed:
+    ticket_id: "TKT-20240115144015-C5D7"
+    category: "failed"
+    issue_type: "ISSUE-003"
+    customer_message: "I'm trying to use a workflow template but I can't find it. I'm on Starter tier - do I have access to all templates?"
+    initial_response: "All templates are available to all users. You should be able to see all templates regardless of tier. Try refreshing your browser - this might be a display bug."
+    resolution_status: "failed"
+    requires_intervention: true
+    follow_up_required: true
+
