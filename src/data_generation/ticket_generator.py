@@ -14,6 +14,8 @@ import os
 import random
 import string
 from datetime import datetime
+from dotenv import load_dotenv
+from tqdm import tqdm
 
 try:
     import openai
@@ -31,6 +33,8 @@ TICKET_TEMPLATE_PATH = "configs/data_generation/ticket_json_template.yaml"
 knowledge_base = load_yaml_config(KNOWLEDGE_BASE_PATH, required=True)
 generator_config = load_yaml_config(GENERATOR_CONFIG_PATH, required=True)
 ticket_template = load_yaml_config(TICKET_TEMPLATE_PATH, required=True)
+
+load_dotenv()
 
 def get_configs():
     return knowledge_base, generator_config, ticket_template
@@ -190,7 +194,7 @@ def generate_ticket(
         )
     
     # Get API key
-    api_key = api_key or os.getenv("OPENAI_API_KEY")
+    api_key = api_key or os.environ.get("OPENAI_API_KEY")
     if not api_key:
         raise RuntimeError(
             "OpenAI API key not provided. Set OPENAI_API_KEY environment variable or pass api_key parameter"
@@ -263,3 +267,37 @@ def generate_ticket(
         raise RuntimeError(f"Failed to parse LLM response as JSON: {e}\nResponse: {content[:500]}")
     except Exception as e:
         raise RuntimeError(f"Error calling LLM API: {e}")
+
+
+def create_ticket_data() -> None:
+
+    output_dir = generator_config.get("output", {}).get("output_dir", None)
+    if not output_dir:
+        raise ValueError(
+            "output_dir is not set in generator_config.yaml. Update configs/data_generation/generator_config.yaml with the correct output directory."
+        )
+    ticket_counts = generator_config.get("generation", {}).get("ticket_counts", {})
+    if not ticket_counts:
+        raise ValueError(
+            "Ticket counts are not set in generator_config.yaml. Update configs/data_generation/generator_config.yaml with the correct ticket counts."
+        )
+    model = generator_config.get("generation", {}).get("model", None)
+    if not model:
+        model = "gpt-4"
+    file_name = knowledge_base.get("company", {}).get("name", "the company").strip().lower().replace(" ", "_")
+    
+    
+    for issue in knowledge_base.get("specific_issues", []):
+        issue_id = issue.get("issue_id", "UNKNOWN")
+        if issue_id not in ["ISSUE-019", "ISSUE-020"]:
+            continue
+        for category, category_count in ticket_counts.items():
+            for _ in tqdm(range(category_count), desc=f"Generating {category} tickets for {issue.get('issue_id', 'UNKNOWN')}"):
+                ticket = generate_ticket(
+                    knowledge_base=knowledge_base, 
+                    ticket_template=ticket_template, 
+                    issue=issue, 
+                    category=category, 
+                    model=model)
+                with open(os.path.join(output_dir, f"{file_name}.jsonl"), "a") as f:
+                    f.write(json.dumps(ticket) + "\n")

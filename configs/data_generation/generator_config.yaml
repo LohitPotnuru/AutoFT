@@ -3,46 +3,23 @@
 
 # Generation Parameters
 generation:
-  # Random seed for reproducibility
-  random_seed: 42
   
-  # Number of tickets to generate for each category
+  # Number of tickets to generate for each issue
   ticket_counts:
-    success: 5        # Successfully resolved tickets
-    correction: 5     # Tickets requiring intervention/correction
-    failed: 5         # Tickets that failed to be resolved
+    success: 1        # Successfully resolved tickets
+    correction: 1     # Tickets requiring intervention/correction
+    failed: 1        # Tickets that failed to be resolved
+
   
+  # Model to use for generation
+  model: "gpt-4"
+
+
 
 # Output Configuration
 output:
-  # Base directory for output files
-  base_directory: "data"
+  output_dir : "data/synthetic_raw/"
   
-
-# Ticket Generation Settings
-ticket_settings:
-  # Customer message generation
-  customer_message:
-    # Minimum and maximum length (in words) for customer messages
-    min_length_words: 10
-    max_length_words: 50
-    
-    # Whether to include customer frustration indicators for failed tickets
-    include_frustration_indicators: true
-  
-  # Response generation
-  response:
-    # Minimum and maximum length (in words) for responses
-    min_length_words: 10
-    max_length_words: 50
-    
-    # For correction tickets: how wrong should the initial response be?
-    # Options: "slightly_wrong", "moderately_wrong", "completely_wrong"
-    initial_response_error_level: "moderately_wrong"
-    
-    # For failed tickets: how wrong should the response be?
-    # Options: "moderately_wrong", "completely_wrong", "irrelevant"
-    failed_response_error_level: "completely_wrong"
 
 # Logging and Debugging
 logging:
