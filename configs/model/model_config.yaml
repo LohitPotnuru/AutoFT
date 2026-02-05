@@ -1,0 +1,2 @@
+model:
+  model_name: TinyLlama/TinyLlama-1.1B-Chat-v1.0 #cheapest for local prototyping

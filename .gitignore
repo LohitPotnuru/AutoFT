@@ -1,2 +1,4 @@
 .env
 playground.py
+lora_adapters/techflow_solutions/sft_adapter/
+**/__pycache__/
