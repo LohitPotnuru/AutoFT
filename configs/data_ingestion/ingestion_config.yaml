@@ -1,0 +1,18 @@
+# Ticket Generator Configuration
+# This file specifies parameters for processing raw ticket data for model training
+
+#Ingestion Parameteres
+ingestion:
+
+  # Directory containing raw ticket data
+  raw_data_path: "data/synthetic_raw/"
+
+  # Directory to store processed ticket data
+  processed_data_path: "data/processed/"
+
+#Data Split Parameters
+data_split:
+
+  #test/eval data split ratio
+  eval_split_ratio: 0.2
+

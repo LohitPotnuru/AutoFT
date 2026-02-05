@@ -24,12 +24,20 @@ except ImportError:
 
 from src.utils import load_yaml_config
 
+#load global config to get company_id first
+GLOBAL_CONFIG_PATH = "configs/global.yaml"
+global_config = load_yaml_config(GLOBAL_CONFIG_PATH, required=True)
+company_id = global_config.get("company", {}).get("company_id", None)
+if not company_id:
+    raise ValueError("company_id is not set in global.yaml. Update configs/global.yaml with the correct company_id.")
+
 # Configuration file paths (relative to project root)
-KNOWLEDGE_BASE_PATH = "configs/company_knowledge_base/techflow_solutions.yaml"
+KNOWLEDGE_BASE_PATH = f"configs/company_knowledge_base/{company_id}.yaml"
 GENERATOR_CONFIG_PATH = "configs/data_generation/generator_config.yaml"
 TICKET_TEMPLATE_PATH = "configs/data_generation/ticket_json_template.yaml"
 
 # Load configuration files
+
 knowledge_base = load_yaml_config(KNOWLEDGE_BASE_PATH, required=True)
 generator_config = load_yaml_config(GENERATOR_CONFIG_PATH, required=True)
 ticket_template = load_yaml_config(TICKET_TEMPLATE_PATH, required=True)
@@ -284,7 +292,6 @@ def create_ticket_data() -> None:
     model = generator_config.get("generation", {}).get("model", None)
     if not model:
         model = "gpt-4"
-    file_name = knowledge_base.get("company", {}).get("name", "the company").strip().lower().replace(" ", "_")
     
     
     for issue in knowledge_base.get("specific_issues", []):
@@ -299,5 +306,5 @@ def create_ticket_data() -> None:
                     issue=issue, 
                     category=category, 
                     model=model)
-                with open(os.path.join(output_dir, f"{file_name}.jsonl"), "a") as f:
+                with open(os.path.join(output_dir, f"{company_id}.jsonl"), "a") as f:
                     f.write(json.dumps(ticket) + "\n")

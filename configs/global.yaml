@@ -1,0 +1,4 @@
+#Configs for entire platform
+
+company:
+  company_id: techflow_solutions #id used for all file names, including company_knowledge_base config, synthetic_raw file name, and processed file name
